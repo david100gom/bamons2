@@ -36,8 +36,8 @@ spring:
     profiles: local
     first :
         datasource:
-            jndi-name : java:/comp/env/jdbc/MySqlDS
-            url : jdbc:mysql://localhost:3306/BAMONS2?useUnicode=true&characterEncoding=UTF-8
+            #jndi-name : java:/comp/env/jdbc/MySqlDS
+            url : jdbc:mysql://localhost:3306/BAMONS2?useUnicode=true&characterEncoding=UTF-8&useSSL=true
             driver-class-name : com.mysql.jdbc.Driver
             username : root
             password : 1111
@@ -50,7 +50,8 @@ spring:
             timeBetweenEvictionRunsMillis : 1800000
     second :
         datasource:
-            url : jdbc:mysql://localhost:3306/BAMONS2?useUnicode=true&characterEncoding=UTF-8
+            #jndi-name : java:/comp/env/jdbc/MySqlDS
+            url : jdbc:mysql://localhost:3306/BAMONS2?useUnicode=true&characterEncoding=UTF-8&useSSL=true
             driver-class-name : com.mysql.jdbc.Driver
             username : root
             password : 1111

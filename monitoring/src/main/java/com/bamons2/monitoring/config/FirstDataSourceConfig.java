@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 /**
  * Created by david100gom on 2017. 8. 13.
  *
- * Github : http://github.com/david100gom
+ * Github : https://github.com/david100gom
  */
 @Configuration
 @EnableTransactionManagement
@@ -32,8 +32,8 @@ public class FirstDataSourceConfig {
     public SqlSessionFactory firstSqlSessionFactory(DataSource firstDataSource, ApplicationContext applicationContext) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(firstDataSource);
-      //  sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:/conf/mybatis/mybatis-config.xml"));
-      //  sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/conf/mybatis/mapper/*.xml"));
+        sqlSessionFactoryBean.setConfigLocation(new PathMatchingResourcePatternResolver().getResource("classpath:/conf/mybatis/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/conf/mybatis/mapper/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
