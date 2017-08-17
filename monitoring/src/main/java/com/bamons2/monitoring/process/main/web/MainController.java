@@ -30,4 +30,12 @@ public class MainController {
         model.addAttribute("today", mainService.today());
         return "index";
     }
+
+    @RequestMapping(value = {"/admin"})
+    public String admin(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+
+        model.addAttribute("today", mainService.today());
+        return "admin";
+    }
 }
