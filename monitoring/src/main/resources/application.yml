@@ -33,7 +33,8 @@ server :
     port: 8080
 
 spring:
-    profiles: local
+    profiles:
+      active: local
     first :
         datasource:
             #jndi-name : java:/comp/env/jdbc/MySqlDS

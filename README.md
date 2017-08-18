@@ -1,11 +1,9 @@
 # bamons2
 
-
 ![Bamons](./document/image/bamons.png)
 
 #### vue.js
-#### react.js 
-#### react native
 #### spring boot
+#### spring security
 #### agent 
-#### spring batch restful api 
+#### spring batch restful api
