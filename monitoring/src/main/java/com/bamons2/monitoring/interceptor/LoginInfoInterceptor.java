@@ -1,7 +1,10 @@
 package com.bamons2.monitoring.interceptor;
 
+import com.bamons2.monitoring.process.member.domain.Member;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +23,7 @@ public class LoginInfoInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         boolean is = true;
+
 
         logger.error(" Class : {}", "LoginInfoInterceptor");
         return is;

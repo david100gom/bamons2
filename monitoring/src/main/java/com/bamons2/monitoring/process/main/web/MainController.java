@@ -1,8 +1,10 @@
 package com.bamons2.monitoring.process.main.web;
 
 import com.bamons2.monitoring.process.main.service.MainService;
+import com.bamons2.monitoring.process.member.domain.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,8 +36,11 @@ public class MainController {
     @RequestMapping(value = {"/admin"})
     public String admin(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 
+        // 로그인 성공후 로그인 정보
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         model.addAttribute("today", mainService.today());
+        model.addAttribute("name", member.getUsername());
         return "admin";
     }
 }
