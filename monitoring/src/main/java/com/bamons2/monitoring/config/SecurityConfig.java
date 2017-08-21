@@ -31,11 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable();
-        //.authorizeRequests().anyRequest().authenticated().and().formLogin();
-
         // 인증 필요 URL
-        http.authorizeRequests().antMatchers("/admin/**").authenticated();
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/admin/member").hasAuthority("ADMIN1")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated();
 
         // 로그인화면
         http.formLogin().loginProcessingUrl("/login");

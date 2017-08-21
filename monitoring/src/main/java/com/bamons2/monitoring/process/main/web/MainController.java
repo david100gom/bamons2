@@ -43,4 +43,26 @@ public class MainController {
         model.addAttribute("name", member.getUsername());
         return "admin";
     }
+
+    @RequestMapping(value = {"/admin/member"})
+    public String member(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+        // 로그인 성공후 로그인 정보
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("today", mainService.today());
+        model.addAttribute("name", member.getUsername());
+        return "member";
+    }
+
+    @RequestMapping(value = {"/user"})
+    public String user(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+
+        // 로그인 성공후 로그인 정보
+        Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        model.addAttribute("today", mainService.today());
+        model.addAttribute("name", member.getUsername());
+        return "user";
+    }
 }
