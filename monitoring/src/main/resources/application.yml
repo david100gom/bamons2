@@ -4,6 +4,9 @@ spring :
         encoding :
             charset : UTF-8
             enabled : true
+    session :
+        store-type : HASH_MAP
+
     freemarker :
         cache : false
         charset : UTF-8

@@ -47,6 +47,22 @@ public class MemberServiceImpl implements MemberService{
 
     /**
      *
+     * 멤버 정보
+     *
+     * @param username
+     * @return
+     */
+    @Override
+    public Member getMember(String username) {
+        Member member = memberDAO.getMember(username);
+        if(member == null) throw new UsernameNotFoundException("No Data");
+
+        member.setAuthorities(getAuthorities(username));
+        return member;
+    }
+
+    /**
+     *
      * 권한 체크
      *
      * @param username
