@@ -24,6 +24,17 @@ spring :
         ehcache :
         config : classpath:/conf/cache/ehcache-config.xml
 
+security :
+#    user :
+#        name : test
+#        password : test
+    oauth2 :
+        client :
+            clientId: test
+            clientSecret: abc
+            authorized-grant-types: authorization_code,refresh_token,password
+            scope: openid
+
 ---
 
 # Server Setting

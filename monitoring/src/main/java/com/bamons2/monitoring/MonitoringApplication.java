@@ -7,6 +7,8 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +18,8 @@ import javax.servlet.ServletException;
  *
  * Github : https://github.com/david100gom
  */
+@EnableResourceServer
+@EnableAuthorizationServer
 @SpringBootApplication
 @EnableAspectJAutoProxy
 @EnableCaching
