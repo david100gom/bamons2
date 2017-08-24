@@ -1,3 +1,3 @@
-index
-
-today : ${today!}
+{
+    index : "index"
+}

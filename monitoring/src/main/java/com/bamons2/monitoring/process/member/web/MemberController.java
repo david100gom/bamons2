@@ -33,6 +33,7 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    // Rest 방식의 로그인
     @RequestMapping(value="/rest/login", method= RequestMethod.POST)
     public AuthenticationToken login(@RequestBody AuthenticationRequest authenticationRequest, HttpServletRequest request){
 
