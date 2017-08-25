@@ -23,14 +23,13 @@ import org.springframework.web.context.WebApplicationContext;
  * Github : https://github.com/david100gom
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MonitoringApplication.class)
+@SpringBootTest(classes = MonitoringApplication.class, webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class OauthIntegrationTest {
 
     private static final String LOCAL_HOST = "http://localhost:";
 
-    //@LocalServerPort
-    private int port = 8080;
-
+    @LocalServerPort
+    private int port;
 
     @Test
     public void retrieveTodos() throws Exception {
@@ -48,7 +47,7 @@ public class OauthIntegrationTest {
         OAuth2RestTemplate oauthTemplate = new OAuth2RestTemplate(resource,new DefaultOAuth2ClientContext());
         ResponseEntity<String> response = oauthTemplate.getForEntity(createURL(uri), String.class);
         JSONAssert.assertEquals(expected, response.getBody(), false);
-        //System.out.print(response.getBody());
+
     }
 
     private String createURL(String uri) {
