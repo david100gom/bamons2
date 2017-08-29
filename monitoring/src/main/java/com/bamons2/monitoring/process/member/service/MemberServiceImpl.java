@@ -1,6 +1,9 @@
 package com.bamons2.monitoring.process.member.service;
 
+import com.bamons2.monitoring.process.member.dao.AuthorityRepository;
 import com.bamons2.monitoring.process.member.dao.MemberDAO;
+import com.bamons2.monitoring.process.member.dao.MemberRepository;
+import com.bamons2.monitoring.process.member.domain.Authority;
 import com.bamons2.monitoring.process.member.domain.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,12 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private MemberDAO memberDAO;
 
+    @Autowired
+    MemberRepository memberRepository;
+
+    @Autowired
+    AuthorityRepository authorityRepository;
+
     /**
      *
      * 권한 정보 매핑
@@ -35,11 +44,13 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Collection<GrantedAuthority> getAuthorities(String username) {
 
-        List<String> list = memberDAO.getAuthority(username);
+        //List<String> list = memberDAO.getAuthority(username);             // mybatis
+        List<Authority> list = authorityRepository.findByUsername(username);   // jpa
+
         List<GrantedAuthority> gaList = new ArrayList<>();
 
-        for(String str : list) {
-            gaList.add(new SimpleGrantedAuthority(str));
+        for(Authority str : list) {
+            gaList.add(new SimpleGrantedAuthority(str.getAuthorityName()));
         }
 
         return gaList;
@@ -54,7 +65,10 @@ public class MemberServiceImpl implements MemberService{
      */
     @Override
     public Member getMember(String username) {
-        Member member = memberDAO.getMember(username);
+
+        //Member member = memberDAO.getMember(username);            // mybatis
+        Member member = memberRepository.findByUsername(username);  // jpa
+
         if(member == null) throw new UsernameNotFoundException("No Data");
 
         member.setAuthorities(getAuthorities(username));
@@ -71,7 +85,8 @@ public class MemberServiceImpl implements MemberService{
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberDAO.getMember(username);
+        //Member member = memberDAO.getMember(username);            // mybatis
+        Member member = memberRepository.findByUsername(username);  // jpa
 
         if(member == null) throw new UsernameNotFoundException("No Data");
 

@@ -34,43 +34,43 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/");
     }
 
-//    // 일반 폼 인증
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//
-//        // 인증 필요 URL
-//        http.csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/user/**").hasAuthority("USER")
-//                .antMatchers("/admin/member").hasAuthority("ADMIN1")
-//                .antMatchers("/admin/**").hasAuthority("ADMIN")
-//                .anyRequest().authenticated();
-//
-//        // 로그인화면
-//        http.formLogin().loginProcessingUrl("/login");
-//
-//        // 로그아웃 + 로그아웃후 포워딩 URL
-//        http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
-//
-//    }
-
-    // for Rest 방식 인증
+    // 일반 폼 인증
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // 인증
+        // 인증 필요 URL
         http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
-                .and()
                 .authorizeRequests()
-                .antMatchers("/rest/login").permitAll()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/admin/member").hasAuthority("ADMIN1")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
-                .and().logout();
+                .anyRequest().authenticated();
+
+        // 로그인화면
+        http.formLogin().loginProcessingUrl("/login");
+
+        // 로그아웃 + 로그아웃후 포워딩 URL
+        http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
 
     }
+
+//    // for Rest 방식 인증
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        // 인증
+//        http.csrf().disable()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/rest/login").permitAll()
+//                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                .antMatchers("/user/**").hasAuthority("USER")
+//                .antMatchers("/admin/**").hasAuthority("ADMIN")
+//                .anyRequest().authenticated()
+//                .and().logout();
+//
+//    }
 
     /**
      * 커스텀 인증
@@ -84,28 +84,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    /**
-     * SpringSecurity에서 사용되는 인증객체를 Bean으로 등록 (for Rest 방식 인증)
-     *
-     *
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    @Override public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    /**
+//     * SpringSecurity에서 사용되는 인증객체를 Bean으로 등록 (for Rest 방식 인증)
+//     *
+//     *
+//     * @return
+//     * @throws Exception
+//     */
+//    @Bean
+//    @Override public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
-    /**
-     * HttpSession 전략으로 쿠키의 세션을 사용하는 대신 header에 'x-auth-token' 값을 사용할 수 있게 해줌 (for Rest 방식 인증)
-     *
-     *
-     * @return
-     */
-    @Bean
-    public HttpSessionStrategy httpSessionStrategy() {
-        return new HeaderHttpSessionStrategy();
-    }
+//    /**
+//     * HttpSession 전략으로 쿠키의 세션을 사용하는 대신 header에 'x-auth-token' 값을 사용할 수 있게 해줌 (for Rest 방식 인증)
+//     *
+//     *
+//     * @return
+//     */
+//    @Bean
+//    public HttpSessionStrategy httpSessionStrategy() {
+//        return new HeaderHttpSessionStrategy();
+//    }
 
     // 테스트용 인증 설정
     //@Autowired

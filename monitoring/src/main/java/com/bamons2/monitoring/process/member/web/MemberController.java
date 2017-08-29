@@ -53,4 +53,6 @@ public class MemberController {
         return new AuthenticationToken(member.getName(), member.getAuthorities(), session.getId());
     }
 
+
+
 }
