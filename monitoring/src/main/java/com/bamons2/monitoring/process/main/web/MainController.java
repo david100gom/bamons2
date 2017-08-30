@@ -27,10 +27,13 @@ public class MainController {
 
     @RequestMapping(value = {"/"})
     public String index(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-
-
         model.addAttribute("today", mainService.today());
         return "index";
+    }
+
+    @RequestMapping(value = {"/movie"})
+    public String movie(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+        return "movie";
     }
 
     @RequestMapping(value = {"/admin"})
