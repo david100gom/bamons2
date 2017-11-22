@@ -5,6 +5,7 @@
     <typeAliases>
 
         <typeAlias alias="member" type="com.bamons2.monitoring.process.member.domain.Member"/>
+        <typeAlias alias="authority" type="com.bamons2.monitoring.process.member.domain.Authority"/>
 
 
     </typeAliases>

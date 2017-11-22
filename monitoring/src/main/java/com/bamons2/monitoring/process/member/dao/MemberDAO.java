@@ -1,5 +1,6 @@
 package com.bamons2.monitoring.process.member.dao;
 
+import com.bamons2.monitoring.process.member.domain.Authority;
 import com.bamons2.monitoring.process.member.domain.Member;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface MemberDAO {
     public Member getMember(String username);
 
     // 권한정보
-    public List<String> getAuthority(String username);
+    public List<Authority> getAuthority(String username);
 
 
 }

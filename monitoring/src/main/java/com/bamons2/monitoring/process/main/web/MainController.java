@@ -36,6 +36,11 @@ public class MainController {
         return "movie";
     }
 
+    @RequestMapping(value = {"/accessDeny"})
+    public String accessDeny(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+        return "access_deny";
+    }
+
     @RequestMapping(value = {"/admin"})
     public String admin(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 

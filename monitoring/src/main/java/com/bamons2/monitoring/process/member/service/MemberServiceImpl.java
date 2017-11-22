@@ -44,8 +44,8 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Collection<GrantedAuthority> getAuthorities(String username) {
 
-        //List<String> list = memberDAO.getAuthority(username);             // mybatis
-        List<Authority> list = authorityRepository.findByUsername(username);   // jpa
+        List<Authority> list = memberDAO.getAuthority(username);             // mybatis
+        //ist<Authority> list = authorityRepository.findByUsername(username);   // jpa
 
         List<GrantedAuthority> gaList = new ArrayList<>();
 
@@ -66,8 +66,8 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member getMember(String username) {
 
-        //Member member = memberDAO.getMember(username);            // mybatis
-        Member member = memberRepository.findByUsername(username);  // jpa
+        Member member = memberDAO.getMember(username);            // mybatis
+        //Member member = memberRepository.findByUsername(username);  // jpa
 
         if(member == null) throw new UsernameNotFoundException("No Data");
 
@@ -85,8 +85,8 @@ public class MemberServiceImpl implements MemberService{
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //Member member = memberDAO.getMember(username);            // mybatis
-        Member member = memberRepository.findByUsername(username);  // jpa
+        Member member = memberDAO.getMember(username);            // mybatis
+        //Member member = memberRepository.findByUsername(username);  // jpa
 
         if(member == null) throw new UsernameNotFoundException("No Data");
 

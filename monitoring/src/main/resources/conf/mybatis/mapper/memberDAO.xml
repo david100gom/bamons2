@@ -3,13 +3,13 @@
 <mapper namespace="memberDAO">
 
     <!-- 계정정보 -->
-    <select id="GET_MEMBER" parameterType="String" resultType="Member">
+    <select id="GET_MEMBER" parameterType="String" resultType="member">
         SELECT * FROM MEMBER WHERE username = #{username}
     </select>
 
     <!-- 권한정보 -->
-    <select id="GET_AUTHORITY" parameterType="String" resultType="String">
-        SELECT authority_name FROM AUTHORITY WHERE username = #{username}
+    <select id="GET_AUTHORITY" parameterType="String" resultType="authority">
+        SELECT authority_name AS authorityName FROM AUTHORITY WHERE username = #{username}
     </select>
 
 

@@ -1,5 +1,6 @@
 package com.bamons2.monitoring.process.member.dao;
 
+import com.bamons2.monitoring.process.member.domain.Authority;
 import com.bamons2.monitoring.process.member.domain.Member;
 
 import org.apache.ibatis.session.SqlSession;
@@ -39,7 +40,7 @@ public class MemberDAOImpl implements MemberDAO{
      * @return
      */
     @Override
-    public List<String> getAuthority(String username) {
+    public List<Authority> getAuthority(String username) {
         return sqlSession.selectList("memberDAO.GET_AUTHORITY", username);
     }
 }
