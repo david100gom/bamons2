@@ -8,9 +8,73 @@
         </layout>
     </appender>
 
+    <!-- 날짜별 파일 -->
+    <!--<appender name="FILE_DAILY" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--&lt;!&ndash; rollover daily &ndash;&gt;-->
+            <!--<springProfile name="local">-->
+               <!--<fileNamePattern>.\logs\server-%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <!--</springProfile>-->
+
+            <!--<springProfile name="dev, qa, prod">-->
+                <!--<fileNamePattern>/usr/local/server/tomcat/logback/server-%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <!--</springProfile>-->
+
+            <!--&lt;!&ndash; keep 7 days' worth of history &ndash;&gt;-->
+            <!--<maxHistory>7</maxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%date %-5level %logger{35} - %message%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!-- 파일 사이즈별 파일 -->
+    <!--<appender name="FILE_SIZE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+            <!--<springProfile name="local">-->
+                <!--<fileNamePattern>.\logs\server.%i.log</fileNamePattern>-->
+            <!--</springProfile>-->
+
+            <!--<springProfile name="dev, qa, prod">-->
+                <!--<fileNamePattern>/usr/local/server/tomcat/logback/server.%i.log</fileNamePattern>-->
+            <!--</springProfile>-->
+
+            <!--<minIndex>1</minIndex>-->
+            <!--<maxIndex>10</maxIndex>-->
+        <!--</rollingPolicy>-->
+        <!--<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+            <!--<maxFileSize>600KB</maxFileSize>-->
+        <!--</triggeringPolicy>-->
+        <!--<encoder>-->
+            <!--<pattern>%date %-5level %logger{35} - %message%n</pattern>-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!-- 날짜별 & 사이즈별 파일 -->
+    <appender name="FILE_SIZE_DAILY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <springProfile name="local">
+                <fileNamePattern>.\logs\server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            </springProfile>
+
+            <springProfile name="dev, qa, prod">
+                <fileNamePattern>/usr/local/server/tomcat/logback/server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            </springProfile>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- or whenever the file size reaches 200MB -->
+            <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %-5level %logger{35} - %message%n</pattern>
+        </encoder>
+    </appender>
+
     <springProfile name="local">
         <root level="ERROR">
-            <!--<appender-ref ref="FILE_DAILY" />-->
+            <appender-ref ref="FILE_SIZE_DAILY" />
             <appender-ref ref="STDOUT" />
         </root>
     </springProfile>
