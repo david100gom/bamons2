@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // TODO http://websystique.com/spring-security/spring-security-4-custom-login-form-annotation-example/
         http.authorizeRequests()
                 .antMatchers("/member/login").permitAll()
-                .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/").authenticated()
                 .and().formLogin().loginPage("/member/login")
